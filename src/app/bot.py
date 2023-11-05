@@ -29,8 +29,11 @@ class Bot:
             return
 
         text = message.text
+        if text is None:
+            raise ValueError("Message has no text")
 
-        if text is None or not (text := text.strip()):
+        parts = text.split(" ", maxsplit=1)
+        if len(parts) == 1 or not (title := parts[1].strip()):
             await message.reply_text(
                 "Kein Ort angegeben. Bitte nutze '/set_location Ortsname'.",
             )
@@ -54,5 +57,5 @@ class Bot:
         await bot.set_chat_administrator_custom_title(
             chat_id=chat_id,
             user_id=user.id,
-            custom_title=text,
+            custom_title=title,
         )
