@@ -1,0 +1,16 @@
+# Files and directories created by conventional Python tools.
+__pycache__
+.venv
+venv
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# IntelliJ IDEA
+.idea/
+
+.env
+
+usages.db
+state.json
+downloads/
