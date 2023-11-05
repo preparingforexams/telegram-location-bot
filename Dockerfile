@@ -28,7 +28,7 @@ RUN poetry install --no-interaction --ansi --only=main --no-root
 FROM base AS prod
 
 # We don't want the tests
-COPY src/az ./src/az
+COPY src/app ./src/app
 
 RUN poetry install --no-interaction --ansi --only-root
 
