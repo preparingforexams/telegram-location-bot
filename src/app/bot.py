@@ -28,4 +28,31 @@ class Bot:
             _LOG.warning("Stupid sexy filters")
             return
 
-        # TODO: implement
+        text = message.text
+
+        if text is None or not (text := text.strip()):
+            await message.reply_text(
+                "Kein Ort angegeben. Bitte nutze '/set_location Ortsname'.",
+            )
+            return
+
+        await message.delete()
+
+        user = message.from_user
+        if user is None:
+            raise ValueError("Message has no from_user")
+
+        chat_id = message.chat_id
+        bot = update.get_bot()
+
+        await bot.promote_chat_member(
+            chat_id=chat_id,
+            user_id=user.id,
+            can_invite_users=True,
+        )
+
+        await bot.set_chat_administrator_custom_title(
+            chat_id=chat_id,
+            user_id=user.id,
+            custom_title=text,
+        )
