@@ -47,4 +47,4 @@ extend-select = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["az"]
+known-first-party = ["app"]
