@@ -2,7 +2,7 @@
 name = "location-bot"
 description = ""
 version = "1.0.0"
-authors = ["OpenAlcoholics <team@openalcoholics.group>"]
+authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
 license = "MIT"
 packages = [
     { include = "app", from = "src" }
