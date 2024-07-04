@@ -15,7 +15,7 @@ priority = "explicit"
 
 [tool.poetry.dependencies]
 bs-config = { version = "1.0.2", extras = ["dotenv"], source = "internal" }
-certifi = "2024.6.2"
+certifi = "2024.7.4"
 python = "~3.12"
 python-telegram-bot = "21.3"
 sentry-sdk = "^2.0.0"
