@@ -21,9 +21,6 @@ spec:
       labels:
         app: update-handler
     spec:
-      tolerations:
-        - key: local-storage
-          value: "false"
       containers:
         - name: app
           image: {{ .Values.image.app }}:{{ .Values.appVersion }}
