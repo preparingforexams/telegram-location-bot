@@ -23,13 +23,13 @@ jobs:
     needs:
       - lint
       - test
-    uses: BlindfoldedSurgery/actions-container/.github/workflows/build-image-docker.yml@v4
+    uses: preparingforexams/actions-container/.github/workflows/build-image-kaniko.yml@v4
     with:
-      platform: 'linux/arm64'
+      runner-name-build: warp-ubuntu-2404-arm64-2x
       push-image: ${{ github.ref_name == github.event.repository.default_branch }}
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.ref_name == github.event.repository.default_branch
     needs:
       - build-container-image
@@ -42,4 +42,4 @@ jobs:
   clean:
     concurrency: cleanup
     needs: [ deploy ]
-    uses: BlindfoldedSurgery/actions-container/.github/workflows/clean.yml@v4
+    uses: preparingforexams/actions-container/.github/workflows/clean.yml@v4
