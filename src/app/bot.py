@@ -2,6 +2,7 @@ import logging
 import signal
 from typing import Any
 
+from bs_nats_updater import create_updater
 from telegram import Update
 from telegram.ext import Application, CommandHandler
 
@@ -15,7 +16,16 @@ class Bot:
         self.config = config
 
     def run(self) -> None:
-        app = Application.builder().token(self.config.telegram.token).build()
+        app = (
+            Application.builder()
+            .updater(
+                create_updater(
+                    self.config.telegram.token,
+                    self.config.nats,
+                )
+            )
+            .build()
+        )
         app.add_handler(CommandHandler("set_location", self._set_location))
         app.run_polling(
             stop_signals=[signal.SIGTERM],

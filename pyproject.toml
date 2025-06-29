@@ -11,6 +11,7 @@ classifiers = [
 
 dependencies = [
     "bs-config [dotenv] ==1.1.1",
+    "bs-nats-updater ==2.0.0",
     "python-telegram-bot ==22.1",
     "sentry-sdk >=2.0.0, <3.0.0",
     "uvloop ==0.21.*",
@@ -31,6 +32,8 @@ explicit = true
 
 [tool.uv.sources]
 bs-config = { index = "internal" }
+bs-nats-updater = { index = "internal" }
+prep-rate-limiter = { index = "internal" }
 
 [build-system]
 requires = ["hatchling"]
