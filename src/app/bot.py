@@ -28,7 +28,10 @@ class Bot:
         )
         app.add_handler(CommandHandler("set_location", self._set_location))
         app.run_polling(
-            stop_signals=[signal.SIGTERM],
+            stop_signals=[
+                signal.SIGINT,
+                signal.SIGTERM,
+            ],
         )
 
     async def _set_location(self, update: Update, _: Any) -> None:
