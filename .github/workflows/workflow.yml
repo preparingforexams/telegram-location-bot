@@ -5,8 +5,15 @@ on:
     branches: [ main ]
   pull_request: { }
 
+permissions:
+  contents: read
+
 jobs:
   required-meta:
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
     uses: BlindfoldedSurgery/actions-meta/.github/workflows/required.yml@v1
 
   lint:
@@ -26,6 +33,9 @@ jobs:
       - lint
       - test
     uses: preparingforexams/actions-container/.github/workflows/build-dual-image-kaniko.yml@v7
+    permissions:
+      contents: read
+      packages: write
     with:
       push-image: ${{ github.ref_name == github.event.repository.default_branch }}
 
@@ -46,6 +56,8 @@ jobs:
   deploy:
     runs-on: ubuntu-24.04
     if: github.ref_name == github.event.repository.default_branch
+    permissions:
+      contents: write
     needs:
       - build-container-image
     steps:
@@ -58,3 +70,5 @@ jobs:
     concurrency: cleanup
     needs: [ deploy ]
     uses: preparingforexams/actions-container/.github/workflows/clean.yml@v7
+    permissions:
+      packages: write
