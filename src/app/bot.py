@@ -1,12 +1,14 @@
 import logging
 import signal
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from bs_nats_updater import create_updater
-from telegram import Update
 from telegram.ext import Application, CommandHandler
 
-from app.config import Config
+if TYPE_CHECKING:
+    from telegram import Update
+
+    from app.config import Config
 
 _LOG = logging.getLogger(__name__)
 
