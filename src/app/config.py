@@ -14,14 +14,14 @@ class SentryConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        dsn = env.get_string("SENTRY_DSN")
+        dsn = env.get_string("sentry-dsn")
 
         if not dsn:
             return None
 
         return cls(
             dsn=dsn,
-            release=env.get_string("APP_VERSION", default="debug"),
+            release=env.get_string("app-version", default="debug"),
         )
 
 
@@ -32,13 +32,9 @@ class TelegramConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self:
-        token = env.get_string("TELEGRAM_TOKEN")
-        if token is None:
-            raise ValueError("No Telegram token")
-
         return cls(
-            token=token,
-            polling_timeout=env.get_int("TELEGRAM_POLLING_TIMEOUT", default=10),
+            token=env.get_string("token", required=True),
+            polling_timeout=env.get_int("polling-timeout", default=10),
         )
 
 
@@ -51,7 +47,7 @@ class Config:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            nats=NatsConfig.from_env(env.scoped("NATS_")),
+            nats=NatsConfig.from_env(env / "nats"),
             sentry=SentryConfig.from_env(env),
-            telegram=TelegramConfig.from_env(env),
+            telegram=TelegramConfig.from_env(env / "telegram"),
         )
