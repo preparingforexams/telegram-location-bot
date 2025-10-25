@@ -10,7 +10,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "bs-config [dotenv] ==3.0.0",
+    "bs-config [dotenv] ==3.1.0",
     "bs-nats-updater ==3.0.0",
     "python-telegram-bot ==22.5",
     "sentry-sdk >=2.0.0, <3.0.0",
